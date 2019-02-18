@@ -14,6 +14,10 @@ def record():
 def shop():
     return render_template('shop.html')
 
+@app.route('/card_info')
+def card_info():
+    return render_template('card_info.html')
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
