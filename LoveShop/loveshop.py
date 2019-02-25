@@ -19,7 +19,9 @@ def record():
 @app.route('/shop')
 def shop():
     line = card_line()
-    return render_template('shop.html',line = line)
+    card_url = '/static/pic/card/'
+    card_filetype = '.png'
+    return render_template('shop.html',line = line,card_url=card_url,card_filetype=card_filetype)
 
 @app.route('/card_info')
 def card_info():
