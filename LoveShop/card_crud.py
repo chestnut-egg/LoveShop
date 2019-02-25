@@ -23,6 +23,7 @@ def add(card_name,card_type,card_info,card_price):
     session.close()
 
 
+#返回卡片数量
 def card_line():
     session = DBSession()
 
