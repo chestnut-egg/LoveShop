@@ -22,6 +22,21 @@ def add(card_name,card_type,card_info,card_price):
     # 关闭session:
     session.close()
 
+
+def card_line():
+    session = DBSession()
+
+    ret1 = session.query(card).all()
+
+    line = len(ret1)
+    print(line)
+
+    session.commit()
+    session.close()
+    return line
+
+
+
 def read():
     session = DBSession()
 
@@ -30,10 +45,11 @@ def read():
     ret3 = session.query(card).filter(card.card_id == '1').all()
     ret4 = session.query(card.card_name).filter(card.card_id == '1').all()
 
-    print(ret1[1].card_name)
-    print(ret2)
-    print(ret3[0].card_name)
-    print(ret4)
+    # print(len(ret1))
+    # print(ret1[1].card_name)
+    # print(ret2)
+    # print(ret3[0].card_name)
+    # print(ret4)
 
     session.commit()
     session.close()

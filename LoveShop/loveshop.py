@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
-
+from LoveShop.card_crud import card_line
 
 app = Flask(__name__)
 engine = create_engine("mysql+pymysql://root:12345678@localhost:3306/dan", max_overflow=5)
@@ -18,8 +18,8 @@ def record():
 
 @app.route('/shop')
 def shop():
-    cur = engine.execute('select * from card')
-    return render_template('shop.html')
+    line = card_line()
+    return render_template('shop.html',line = line)
 
 @app.route('/card_info')
 def card_info():

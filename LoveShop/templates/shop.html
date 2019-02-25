@@ -20,7 +20,19 @@
 	<h3 style="text-align:center; left: 100px; position: absolute; top: 350px;">..</h3>
 	<h3 style="text-align:center; left: 100px; position: absolute; top: 400px;">..</h3>
   </div>
+
   <div class="col-md-8" style="background:rgb(247,247,247);height:950px">
+      <p>{{line}}</p>
+
+<h1>
+    {% for i in range(line) %}
+
+          {{ i+1 }}
+
+    {% endfor %}
+</h1>
+
+
         <img src="/static/pic/card/1.png" class="img-thumbnail">
 
 
