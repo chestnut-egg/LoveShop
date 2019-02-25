@@ -1,0 +1,18 @@
+from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+class card(Base):
+    # 表的名字:
+    __tablename__ = 'card'
+    # 表的结构:
+    card_id = Column(Integer, primary_key=True,autoincrement=True)
+    card_name = Column(String(20))
+    card_type = Column(String(20))
+    card_info = Column(String(20))
+    card_price = Column(Integer)
+
+#创建表
+# Base.metadata.create_all(engine)
