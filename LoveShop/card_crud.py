@@ -37,6 +37,21 @@ def card_line():
     return line
 
 
+#返回卡片信息
+def show_cardinfo(card_id):
+    session = DBSession()
+    ret = session.query(card).filter(card.card_id == card_id).all()
+
+    dict={}
+    dict['card_id'] = ret[0].card_id
+    dict['card_name'] = ret[0].card_name
+    dict['card_type'] = ret[0].card_type
+    dict['card_info'] = ret[0].card_info
+    dict['card_price'] = ret[0].card_price
+
+    return dict
+
+
 
 def read():
     session = DBSession()
@@ -55,6 +70,3 @@ def read():
     session.commit()
     session.close()
 
-
-
-read()

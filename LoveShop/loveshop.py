@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
-from LoveShop.card_crud import card_line
+from LoveShop.card_crud import card_line, show_cardinfo
 
 app = Flask(__name__)
 engine = create_engine("mysql+pymysql://root:12345678@localhost:3306/dan", max_overflow=5)
@@ -25,7 +25,15 @@ def shop():
 
 @app.route('/card_info')
 def card_info():
-    return render_template('card_info.html')
+    card_id = request.args.get("card_id")
+    #print(card_id)
+
+    card = show_cardinfo(card_id)
+
+    card_url = '/static/pic/card/'
+    card_filetype = '.png'
+
+    return render_template('card_info.html',card=card,card_url=card_url,card_filetype=card_filetype)
 
 if __name__ == '__main__':
     app.debug = True
