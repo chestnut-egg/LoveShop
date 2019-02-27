@@ -1,27 +1,49 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from sqlalchemy import create_engine
 from LoveShop.crud.card_crud import card_line, show_cardinfo
+from LoveShop.crud.user_crud import find_user_by_account
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
 from LoveShop.img_config import img_card
 
 app = Flask(__name__)
 engine = create_engine(SQLALCHEMY_DATABASE_URI, max_overflow=100)
 app.config.from_object('dbmysql')
-
+app.config['SECRET_KEY'] = '123456'
 
 
 @app.route('/')
 def hello_world():
     return 'Hello World!'
 
-@app.route('/login')
+@app.route('/login',methods=['GET', 'POST'])
 def login():
-    account = request.form.get('account')
-    password = request.form.get('password')
+    print('进入函数')
+    if request.method == 'POST':
+        print('post')
+        account = request.form.get('account')
+        print("从页面获取账号")
+        print(account)
+        password = request.form.get('password')
+        print("从页面获取mm")
+        print(password)
+
+        user = find_user_by_account(account)
+
+        if (user['user_password'] == '-1'):
+            print('用户名错误')
+            return render_template('login.html', wrong='用户名错误')
+        else:
+            if (user['user_password'] != password):
+                return render_template('login.html', wrong='密码错误')
+            else:
+                session['user_id'] = user['user_id']
+                session['user_name'] = user['user_name']
+                return render_template('record.html', user_name=session['user_name'])
+    else:
+        print('get')
+        return render_template('login.html')
 
 
-
-    return render_template('record.html')
 
 @app.route('/record')
 def record():

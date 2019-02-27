@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
 from sqlalchemy.ext.declarative import declarative_base
 
-from LoveShop.dbdata import card,user
+from LoveShop.dbdata import card
 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
@@ -19,19 +19,6 @@ def add_card(card_name,card_type,card_info,card_price):
     new_card = card(card_name=card_name, card_type=card_type, card_info=card_info, card_price=card_price)
     # 添加到session:
     session.add(new_card)
-    # 提交即保存到数据库:
-    session.commit()
-    # 关闭session:
-    session.close()
-
-# 增加用户
-def add_user(user_name,user_account,user_password):
-    #创建session对象:
-    session = DBSession()
-    # 创建新User对象:
-    new_user = user(user_name=user_name, user_account=user_account, user_password=user_password)
-    # 添加到session:
-    session.add(new_user)
     # 提交即保存到数据库:
     session.commit()
     # 关闭session:
@@ -85,4 +72,3 @@ def read():
     session.commit()
     session.close()
 
-# add_user('dandan','dandan','123456')
