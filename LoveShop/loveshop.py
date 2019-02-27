@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
 from LoveShop.card_crud import card_line, show_cardinfo
+from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
 
 app = Flask(__name__)
-engine = create_engine("mysql+pymysql://root:12345678@localhost:3306/dan", max_overflow=5)
+engine = create_engine(SQLALCHEMY_DATABASE_URI, max_overflow=100)
 app.config.from_object('dbmysql')
 
 
