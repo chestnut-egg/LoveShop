@@ -1,6 +1,7 @@
 from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
 
 Base = declarative_base()
 
@@ -15,4 +16,5 @@ class card(Base):
     card_price = Column(Integer)
 
 #创建表
+# engine = create_engine(SQLALCHEMY_DATABASE_URI)
 # Base.metadata.create_all(engine)

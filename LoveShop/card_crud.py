@@ -1,11 +1,11 @@
 from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
 from sqlalchemy.orm import sessionmaker
+from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
 from sqlalchemy.ext.declarative import declarative_base
 
 from LoveShop.dbdata import card
 
 
-SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:12345678@localhost:3306/dan"
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
