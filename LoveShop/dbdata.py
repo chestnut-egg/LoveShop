@@ -1,4 +1,4 @@
-from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
+from sqlalchemy import select, create_engine, Table, Column, Integer, String, MetaData, ForeignKey, Time
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
@@ -22,6 +22,16 @@ class user(Base):
     user_name = Column(String(20))
     user_account = Column(String(20))
     user_password = Column(String(20))
+
+class record(Base):
+    __tablename__ = 'record'
+
+    record_id = Column(Integer, primary_key=True,autoincrement=True)
+    user_id = Column(Integer)
+    record_time = Column(Time)
+    record_type = Column(String(20))
+    record_amount = Column(Integer)
+    record_state = Column(String(20))
 
 #创建表
 # engine = create_engine(SQLALCHEMY_DATABASE_URI)

@@ -17,28 +17,24 @@ def hello_world():
 
 @app.route('/login',methods=['GET', 'POST'])
 def login():
-    print('进入函数')
     if request.method == 'POST':
-        print('post')
         account = request.form.get('account')
-        print("从页面获取账号")
         print(account)
         password = request.form.get('password')
-        print("从页面获取mm")
         print(password)
+
 
         user = find_user_by_account(account)
 
         if (user['user_password'] == '-1'):
-            print('用户名错误')
-            return render_template('login.html', wrong='用户名错误')
+            return render_template('login.html', wrong = '用户名错误')
         else:
             if (user['user_password'] != password):
-                return render_template('login.html', wrong='密码错误')
+                return render_template('login.html', wrong = '密码错误')
             else:
                 session['user_id'] = user['user_id']
                 session['user_name'] = user['user_name']
-                return render_template('record.html', user_name=session['user_name'])
+                return render_template('record.html', user_name = session['user_name'])
     else:
         print('get')
         return render_template('login.html')
@@ -58,12 +54,8 @@ def shop():
 @app.route('/card_info')
 def card_info():
     card_id = request.args.get("card_id")
-    #print(card_id)
-
     card = show_cardinfo(card_id)
-
     img = img_card()
-
     return render_template('card_info.html',card=card,img=img)
 
 if __name__ == '__main__':
