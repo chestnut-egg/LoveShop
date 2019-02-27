@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
-from LoveShop.card_crud import card_line, show_cardinfo
+from sqlalchemy import create_engine
+from LoveShop.crud.card_crud import card_line, show_cardinfo
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
 from LoveShop.img_config import img_card
 
@@ -13,6 +13,15 @@ app.config.from_object('dbmysql')
 @app.route('/')
 def hello_world():
     return 'Hello World!'
+
+@app.route('/login')
+def login():
+    account = request.form.get('account')
+    password = request.form.get('password')
+
+
+
+    return render_template('record.html')
 
 @app.route('/record')
 def record():
