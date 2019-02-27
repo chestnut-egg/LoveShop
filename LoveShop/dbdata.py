@@ -15,6 +15,14 @@ class card(Base):
     card_info = Column(String(20))
     card_price = Column(Integer)
 
+class user(Base):
+    __tablename__ = 'user'
+
+    user_id = Column(Integer, primary_key=True,autoincrement=True)
+    user_name = Column(String(20))
+    user_account = Column(String(20))
+    user_password = Column(String(20))
+
 #创建表
 # engine = create_engine(SQLALCHEMY_DATABASE_URI)
 # Base.metadata.create_all(engine)
