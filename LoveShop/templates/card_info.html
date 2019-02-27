@@ -4,7 +4,12 @@
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <style type="text/css">
+        a:link {color: black}    /*未被访问的链接*/
+        a:visited {color: black} /* 已被访问过的链接*/
+        a:hover {color:black}    /* 鼠标悬浮在上的链接*/
+        a:active {color: black}   /* 鼠标点中激活链接*/
+    </style>
 	<meta charset="UTF-8">
     <title>record</title>
 </head>
@@ -12,8 +17,8 @@
 
 <div class="row">
   <div class="col-md-4">
-      <p style="text-align:center; left: 100px; position: absolute; top: 20px; font-size:180%">我的账户</p>
-      <p style="text-align:center; left: 300px; position: absolute; top: 20px; font-size:180%">商城</p>
+      <a href={{url_for("record")}}> <p style="text-align:center; left: 100px; position: absolute; top: 20px; font-size:180%">我的账户</p> </a>
+      <a href={{url_for("shop")}}> <p style="text-align:center; left: 300px; position: absolute; top: 20px; font-size:180%">商城</p> </a>
 
 	<h3 style="text-align:center; left: 100px; position: absolute; top: 250px;">卡片</h3>
 	<h3 style="text-align:center; left: 100px; position: absolute; top: 300px;">..</h3>
