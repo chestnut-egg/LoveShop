@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from sqlalchemy import select,create_engine, Table, Column, Integer, String, MetaData, ForeignKey
 from LoveShop.card_crud import card_line, show_cardinfo
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
+from LoveShop.img_config import img_card
 
 app = Flask(__name__)
 engine = create_engine(SQLALCHEMY_DATABASE_URI, max_overflow=100)
@@ -20,9 +21,8 @@ def record():
 @app.route('/shop')
 def shop():
     line = card_line()
-    card_url = '/static/pic/card/'
-    card_filetype = '.png'
-    return render_template('shop.html',line = line,card_url=card_url,card_filetype=card_filetype)
+    img = img_card()
+    return render_template('shop.html',line = line,img=img)
 
 @app.route('/card_info')
 def card_info():
@@ -31,10 +31,9 @@ def card_info():
 
     card = show_cardinfo(card_id)
 
-    card_url = '/static/pic/card/'
-    card_filetype = '.png'
+    img = img_card()
 
-    return render_template('card_info.html',card=card,card_url=card_url,card_filetype=card_filetype)
+    return render_template('card_info.html',card=card,img=img)
 
 if __name__ == '__main__':
     app.debug = True

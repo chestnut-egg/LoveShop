@@ -26,7 +26,7 @@
         {% for i in range(line) %}
 
       <a href={{url_for("card_info",card_id=i+1)}}>
-          <img src={{card_url}}{{i+1}}{{card_filetype}} class="img-thumbnail">
+          <img src={{img['card_url']}}{{i+1}}{{img['card_filetype']}} class="img-thumbnail">
       </a>
         {% endfor %}
 
