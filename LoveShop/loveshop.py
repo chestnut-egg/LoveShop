@@ -34,6 +34,7 @@ def login():
             else:
                 session['user_id'] = user['user_id']
                 session['user_name'] = user['user_name']
+                app.logger.info('user_name： '+user['user_name']+' 已经登陆')
                 return redirect(url_for('record'))
     else:
         print('get')
