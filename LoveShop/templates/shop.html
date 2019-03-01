@@ -28,7 +28,7 @@
 
   <div class="col-md-8" style="background:rgb(247,247,247);height:950px">
 
-        {% for i in range(line) %}
+        {% for i in range(card_len) %}
 
       <a href={{url_for("card_info",card_id=i+1)}}>
           <img src={{img['card_url']}}{{i+1}}{{img['card_filetype']}} class="img-thumbnail">

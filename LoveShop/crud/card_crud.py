@@ -26,17 +26,13 @@ def add_card(card_name,card_type,card_info,card_price):
 
 
 #返回卡片数量
-def card_line():
+def card_len():
     session = DBSession()
-
     ret1 = session.query(card).all()
-
-    line = len(ret1)
-    print(line)
-
+    this_len = len(ret1)
     session.commit()
     session.close()
-    return line
+    return this_len
 
 
 #返回卡片信息

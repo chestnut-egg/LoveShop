@@ -2,8 +2,8 @@ from flask import *
 from sqlalchemy import create_engine
 from werkzeug.utils import redirect
 
-from LoveShop.crud.card_crud import card_line, show_cardinfo
-from LoveShop.crud.user_crud import find_user_by_account
+from LoveShop.crud.card_crud import *
+from LoveShop.crud.user_crud import *
 from LoveShop.crud.record_crud import *
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
 from LoveShop.img_config import img_card
@@ -51,9 +51,9 @@ def record():
 
 @app.route('/shop')
 def shop():
-    line = card_line()
+    this_len = card_len()
     img = img_card()
-    return render_template('shop.html',line = line,img=img)
+    return render_template('shop.html',card_len=this_len,img=img)
 
 @app.route('/card_info')
 def card_info():
