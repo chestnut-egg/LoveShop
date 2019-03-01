@@ -1,4 +1,4 @@
-from sqlalchemy import select, create_engine, Table, Column, Integer, String, MetaData, ForeignKey, Time
+from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
@@ -28,7 +28,7 @@ class record(Base):
 
     record_id = Column(Integer, primary_key=True,autoincrement=True)
     user_id = Column(Integer)
-    record_time = Column(Time)
+    record_time = Column(DateTime)
     record_type = Column(String(20))
     record_amount = Column(Integer)
     record_state = Column(String(20))
