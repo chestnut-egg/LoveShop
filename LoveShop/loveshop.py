@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request, session
+from flask import *
 from sqlalchemy import create_engine
+from werkzeug.utils import redirect
+
 from LoveShop.crud.card_crud import card_line, show_cardinfo
 from LoveShop.crud.user_crud import find_user_by_account
+from LoveShop.crud.record_crud import *
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
 from LoveShop.img_config import img_card
 
@@ -19,10 +22,7 @@ def hello_world():
 def login():
     if request.method == 'POST':
         account = request.form.get('account')
-        print(account)
         password = request.form.get('password')
-        print(password)
-
 
         user = find_user_by_account(account)
 
@@ -34,7 +34,7 @@ def login():
             else:
                 session['user_id'] = user['user_id']
                 session['user_name'] = user['user_name']
-                return render_template('record.html', user_name = session['user_name'])
+                return redirect(url_for('record'))
     else:
         print('get')
         return render_template('login.html')
@@ -43,7 +43,10 @@ def login():
 
 @app.route('/record')
 def record():
-    return render_template('record.html')
+    user_id = session['user_id']
+    this_len = record_len(session['user_id'])
+    this_record = find_record_by_user_id(user_id)
+    return render_template('record.html',record=this_record,record_len=this_len)
 
 @app.route('/shop')
 def shop():

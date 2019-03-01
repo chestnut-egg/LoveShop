@@ -1,13 +1,26 @@
 from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker
+
+from LoveShop.dbdata import *
 from LoveShop.dbmysql import SQLALCHEMY_DATABASE_URI
-from LoveShop.dbdata import record
 import datetime
 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
+
+#返回卡片数量
+def record_len(user_id):
+    session = DBSession()
+
+    ret = session.query(record).filter(record.user_id == user_id).all()
+
+    this_len = len(ret)
+
+    session.commit()
+    session.close()
+    return this_len
 
 
 # 增加用户
@@ -24,7 +37,10 @@ def add_record(user_id,record_time,record_type,record_amount,record_state):
     session.close()
 
 # 通过用户id返回消费记录
+# 最外层为list 里面为rect
+# 若为空 list[0]['record_id'] = -1
 def find_record_by_user_id(user_id):
+
     session = DBSession()
 
     query = session.query(record).filter(
@@ -35,36 +51,27 @@ def find_record_by_user_id(user_id):
         query.exists()
     ).scalar()
 
-    record = []
-
-    record_id_list = []
-    record_time_list = []
-    record_type_list = []
-    record_amount_list = []
-    record_state_list = []
+    record_list = []
 
     if isexist == True:
         ret = session.query(record).filter(record.user_id == user_id).all()
         for i in range(len(ret)):
-            record_id_list.append(ret[i].record_id)
-            record_time_list.append(ret[i].record_time)
-            record_type_list.append(ret[i].record_type)
-            record_amount_list.append(ret[i].record_amount)
-            record_state_list.append(ret[i].record_state)
+            this_record = {}
+            this_record['record_id'] = ret[i].record_id
+            this_record['record_time'] = ret[i].record_time
+            this_record['record_type'] = ret[i].record_type
+            this_record['record_amount'] = ret[i].record_amount
+            this_record['record_state'] = ret[i].record_state
+            record_list.append(this_record)
     else:
-        record_id_list.append(-1)
+        this_record = {}
+        this_record['record_id'] = -1
+        record_list.append(this_record)
 
-    record.append(record_id_list)
-    record.append(record_time_list)
-    record.append(record_type_list)
-    record.append(record_amount_list)
-    record.append(record_state_list)
-
-    return record
+    return record_list
 
 # now_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 # add_record(1,now_time,'购买卡片',5,'交易完成')
 
-list = find_record_by_user_id(1)
-
-print(list[0][0])
+# list = find_record_by_user_id(3)
+# print(list[0]['record_id'])

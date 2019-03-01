@@ -53,24 +53,18 @@
 					  </tr>
 					</thead>
 					<tbody>
+
+						{% for i in range(record_len) %}
+
 						<tr>
-						<td>2019/01/08 03:00 PM</td>
-						<td>购买卡片</td>
-						<td>24❤</td>
-						<td>支付完成</td>
+						<td>{{ record[i]['record_time'] }}</td>
+						<td>{{ record[i]['record_type'] }}</td>
+						<td>{{ record[i]['record_amount'] }}❤</td>
+						<td>{{ record[i]['record_state'] }}</td>
 						</tr>
-						<tr>
-						<td>2019/01/08 03:00 PM</td>
-						<td>购买卡片</td>
-						<td>24❤</td>
-						<td>支付完成</td>
-						</tr>
-						<tr>
-						<td>2019/01/08 03:00 PM</td>
-						<td>购买卡片</td>
-						<td>24❤</td>
-						<td>已完成</td>
-						</tr>
+
+						{% endfor %}
+
 					</tbody>
 				</table>
 			</div>
