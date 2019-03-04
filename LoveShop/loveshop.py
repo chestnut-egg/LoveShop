@@ -62,6 +62,12 @@ def card_info():
     img = img_card()
     return render_template('card_info.html',card=card,img=img)
 
+@app.route('/buy_card')
+def buy_card():
+    this_len = card_len()
+    img = img_card()
+    return render_template('shop.html',card_len=this_len,img=img)
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
