@@ -64,9 +64,8 @@ def card_info():
 
 @app.route('/buy_card')
 def buy_card():
-    this_len = card_len()
-    img = img_card()
-    return render_template('shop.html',card_len=this_len,img=img)
+    number = request.form.get('number')
+    return render_template('shop.html')
 
 if __name__ == '__main__':
     app.debug = True
