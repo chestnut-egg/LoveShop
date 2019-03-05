@@ -62,10 +62,13 @@ def card_info():
     img = img_card()
     return render_template('card_info.html',card=card,img=img)
 
-@app.route('/buy_card')
+@app.route('/buy_card',methods=['GET','POST'])
 def buy_card():
     number = request.form.get('number')
-    return render_template('shop.html')
+    price = show_cardinfo('1')['card_price']
+    amount = int(price) * int(number)
+    print(str(price) + '*' + str(number) + '=' + str(amount))
+    return redirect(url_for('shop'))
 
 if __name__ == '__main__':
     app.debug = True
