@@ -58,6 +58,7 @@ def shop():
 @app.route('/card_info')
 def card_info():
     card_id = request.args.get("card_id")
+    session['card_id'] = card_id
     card = show_cardinfo(card_id)
     img = img_card()
     return render_template('card_info.html',card=card,img=img)
@@ -65,7 +66,7 @@ def card_info():
 @app.route('/buy_card',methods=['GET','POST'])
 def buy_card():
     number = request.form.get('number')
-    price = show_cardinfo('1')['card_price']
+    price = show_cardinfo(session['card_id'])['card_price']
     amount = int(price) * int(number)
     print(str(price) + '*' + str(number) + '=' + str(amount))
     return redirect(url_for('shop'))
