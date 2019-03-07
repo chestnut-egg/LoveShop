@@ -69,7 +69,12 @@ def buy_card():
     price = show_cardinfo(session['card_id'])['card_price']
     amount = int(price) * int(number)
     print(str(price) + '*' + str(number) + '=' + str(amount))
-    return redirect(url_for('shop'))
+    return redirect(url_for('buy_status'))
+
+@app.route('/buy_status',methods=['GET','POST'])
+def buy_card():
+
+    return render_template('buy_status.html')
 
 if __name__ == '__main__':
     app.debug = True
