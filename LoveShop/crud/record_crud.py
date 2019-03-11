@@ -10,7 +10,7 @@ engine = create_engine(SQLALCHEMY_DATABASE_URI)
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
 
-#返回卡片数量
+#返回记录数量
 def record_len(user_id):
     session = DBSession()
 
@@ -23,7 +23,7 @@ def record_len(user_id):
     return this_len
 
 
-# 增加用户
+# 增加消费记录
 def add_record(user_id,record_time,record_type,record_amount,record_state):
     #创建session对象:
     session = DBSession()
