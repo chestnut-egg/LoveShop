@@ -74,6 +74,8 @@ def buy_card():
 @app.route('/buy_status',methods=['GET','POST'])
 def buy_card():
 
+    #todo
+    #消费记录的逻辑 扣款 卡包增加卡片
     return render_template('buy_status.html')
 
 if __name__ == '__main__':
